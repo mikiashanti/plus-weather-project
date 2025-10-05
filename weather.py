@@ -24,7 +24,8 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-    pass
+    date = datetime.fromisoformat(iso_string)
+    return date.strftime("%A %d %B %Y")
 
 
 def convert_f_to_c(temp_in_fahrenheit):
@@ -35,7 +36,7 @@ def convert_f_to_c(temp_in_fahrenheit):
     Returns:
         A float representing a temperature in degrees Celcius, rounded to 1 decimal place.
     """
-    pass
+    return round((temp_in_fahrenheit - 32) * 5 / 9, 1)
 
 
 def calculate_mean(weather_data):
@@ -46,7 +47,10 @@ def calculate_mean(weather_data):
     Returns:
         A float representing the mean value.
     """
-    pass
+    import statistics
+
+    mean = float(statistics.mean(weather_data))
+    return mean
 
 
 def load_data_from_csv(csv_file):
@@ -57,7 +61,16 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    pass
+    list = []
+    with open("csv_file", encoding="utf-8") as csv_file:
+        do_stuff_to(csv_file) 
+
+    reader = csv.reader(csv_file)
+
+    for data in reader:
+        return(data[0])
+
+    return list
 
 
 def find_min(weather_data):
@@ -68,7 +81,10 @@ def find_min(weather_data):
     Returns:
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    min_value = min(weather_data)
+    min_position = weather_data.index(min_value)
+    last_value = min(weather_data)[-1]
+    return last_value
 
 
 def find_max(weather_data):
@@ -79,7 +95,10 @@ def find_max(weather_data):
     Returns:
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
-    pass
+    max_value = max(weather_data)
+    min_position = weather_data.index(max_value)
+    last_value = max(weather_data)[-1]
+    return last_value
 
 
 def generate_summary(weather_data):
@@ -90,7 +109,9 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    separator = " , "
+    daily_data = separator.join(str(data_point) for data_point in daily_data)
+    return daily_data
 
 
 def generate_daily_summary(weather_data):
