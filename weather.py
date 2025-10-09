@@ -16,6 +16,8 @@ def format_temperature(temp):
     return f"{temp}{DEGREE_SYMBOL}"
 
 
+
+
 def convert_date(iso_string):
     """Converts and ISO formatted date into a human-readable format.
 
@@ -28,6 +30,8 @@ def convert_date(iso_string):
     return date.strftime("%A %d %B %Y")
 
 
+
+
 def convert_f_to_c(temp_in_fahrenheit):
     """Converts a temperature from Fahrenheit to Celcius.
 
@@ -37,6 +41,8 @@ def convert_f_to_c(temp_in_fahrenheit):
         A float representing a temperature in degrees Celcius, rounded to 1 decimal place.
     """
     return round((temp_in_fahrenheit - 32) * 5 / 9, 1)
+
+
 
 
 def calculate_mean(weather_data):
@@ -53,6 +59,8 @@ def calculate_mean(weather_data):
     return mean
 
 
+
+
 def load_data_from_csv(csv_file):
     """Reads a csv file and stores the data in a list.
 
@@ -61,16 +69,25 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    list = []
-    with open("csv_file", encoding="utf-8") as csv_file:
-        do_stuff_to(csv_file) 
+    data = []
+    with open(csv_file, encoding="utf-8") as csv_data:
+        reader = csv.reader(csv_data)
+        next(reader)
 
-    reader = csv.reader(csv_file)
+        for row in reader:
+            if len(row) >= 3:
+                try:
+                    date = row[0]
+                    min_temp = int(row[1])
+                    max_temp = int(row[2])
+                    data.append([date, min_temp, max_temp])
+                except ValueError:
+                    continue
 
-    for data in reader:
-        return(data[0])
+    return data
 
-    return list
+
+
 
 
 def find_min(weather_data):
@@ -82,9 +99,12 @@ def find_min(weather_data):
         The minimum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
     min_value = min(weather_data)
-    min_position = weather_data.index(min_value)
-    last_value = min(weather_data)[-1]
-    return last_value
+
+    min_index = len(weather_data) - 1 - weather_data[::-1].index(min_value)
+
+    return (min_value, min_index)
+
+
 
 
 def find_max(weather_data):
@@ -96,9 +116,12 @@ def find_max(weather_data):
         The maximum value and it's position in the list. (In case of multiple matches, return the index of the *last* example in the list.)
     """
     max_value = max(weather_data)
-    min_position = weather_data.index(max_value)
-    last_value = max(weather_data)[-1]
-    return last_value
+
+    max_index = len(weather_data) - 1 - weather_data[::-1].index(max_value)
+
+    return (max_value, max_index)
+
+
 
 
 def generate_summary(weather_data):
@@ -109,9 +132,17 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    separator = " , "
-    daily_data = separator.join(str(data_point) for data_point in daily_data)
-    return daily_data
+
+    summary = []
+
+    for data_point in weather_data:
+        str_items = []
+        for item in data_point:
+            str_items.append(str(item))
+        summary.append(" , ".join(str_items))
+
+    return summary
+
 
 
 def generate_daily_summary(weather_data):
@@ -122,4 +153,12 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    pass
+    summary = []
+
+    for data_point in weather_data:
+        str_items = []
+        for item in data_point:
+            str_items.append(str(item))
+        summary.append(" , ".join(str_items))
+
+    return summary
