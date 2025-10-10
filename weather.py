@@ -55,7 +55,8 @@ def calculate_mean(weather_data):
     """
     import statistics
 
-    mean = float(statistics.mean(weather_data))
+    #mean = float(statistics.mean(weather_data))
+    mean = sum(weather_data) / len(weather_data)
     return mean
 
 
@@ -102,7 +103,7 @@ def find_min(weather_data):
 
     min_index = len(weather_data) - 1 - weather_data[::-1].index(min_value)
 
-    return (min_value, min_index)
+    return (float(min_value), min_index)
 
 
 
@@ -119,7 +120,7 @@ def find_max(weather_data):
 
     max_index = len(weather_data) - 1 - weather_data[::-1].index(max_value)
 
-    return (max_value, max_index)
+    return (float(max_value), max_index)
 
 
 
