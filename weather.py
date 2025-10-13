@@ -148,11 +148,9 @@ def generate_summary(weather_data):
     """
 
     num_days = len(weather_data)
+
     min_temps = [day[1] for day in weather_data]    
     max_temps = [day[2] for day in weather_data]
-
-    min_temp_c = [convert_f_to_c(temp) for temp in min_temps]
-    max_temp_c = [convert_f_to_c(temp) for temp in max_temps]
 
     min_temp, min_index = find_min(min_temps)
     max_temp, max_index = find_max(max_temps)
@@ -190,6 +188,7 @@ def generate_daily_summary(weather_data):
         A string containing the summary information.
     """
     summary = ""
+
     for day in weather_data:
         date = convert_date(day[0])
         min_temp = convert_f_to_c(day[1])
