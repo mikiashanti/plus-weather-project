@@ -110,13 +110,19 @@ def find_min(weather_data):
     min_value = min(float_data)
 
     min_index = None
-    for index, value in enumerate(float_data):
-        if value == min_value:
+    for index, x in enumerate(float_data):
+        if x == min_value:
             min_index = index
 
+    return (float(min_value), min_index)
+    
+
+    # reverse_table = float_data.reverse()
+    # min_value = min(reverse_table)
+    # min_index = reverse_table.index(min_value)
+    # return (float(min_value), min_index)
     #min_index = len(float_data) - 1 - float_data[::-1].index(min_value)
 
-    return (float(min_value), min_index)
 
 
 
@@ -135,14 +141,17 @@ def find_max(weather_data):
     
     max_value = max(float_data)
 
-    #max_index = len(float_data) - 1 - float_data[::-1].index(max_value)
+    
 
-    mx_index = None
-    for index, value in enumerate(float_data):
-        if value == max_value:
+    max_index = None
+    for index, x in enumerate(float_data):
+        if x == max_value:
             max_index = index
 
     return (float(max_value), max_index)
+
+    # Or use for loop
+    # max_index = len(float_data) - 1 - float_data[::-1].index(max_value)
 
 
 
@@ -202,14 +211,12 @@ def generate_daily_summary(weather_data):
         date = convert_date(day[0])
         min_temp = convert_f_to_c(day[1])
         max_temp = convert_f_to_c(day[2])
-        
-        daily_summary = (
+
+        summary += (
             f"---- {date} ----\n"
             f"  Minimum Temperature: {format_temperature(min_temp)}\n"
             f"  Maximum Temperature: {format_temperature(max_temp)}\n"
             "\n"
         )
-
-        summary += daily_summary
    
     return summary
