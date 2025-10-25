@@ -60,13 +60,6 @@ def calculate_mean(weather_data):
     mean = float(sum(float_data)) / float(len_data)
     return mean
 
-    # import statistics
-    # float_data = [float(value) for value in weather_data]
-    # mean = float(statistics.mean(float_data))
-    # return mean
-
-
-
 
 
 
@@ -84,7 +77,7 @@ def load_data_from_csv(csv_file):
         next(reader)
 
         for row in reader:
-            if len(row) >= 3:
+            if len(row) > 0:
                     date = row[0]
                     min_temp = int(row[1])
                     max_temp = int(row[2])
@@ -117,14 +110,6 @@ def find_min(weather_data):
     return (float(min_value), min_index)
     
 
-    # reverse_table = float_data.reverse()
-    # min_value = min(reverse_table)
-    # min_index = reverse_table.index(min_value)
-    # return (float(min_value), min_index)
-    #min_index = len(float_data) - 1 - float_data[::-1].index(min_value)
-
-
-
 
 
 def find_max(weather_data):
@@ -141,18 +126,12 @@ def find_max(weather_data):
     
     max_value = max(float_data)
 
-    
-
     max_index = None
     for index, x in enumerate(float_data):
         if x == max_value:
             max_index = index
 
     return (float(max_value), max_index)
-
-    # Or use for loop
-    # max_index = len(float_data) - 1 - float_data[::-1].index(max_value)
-
 
 
 
